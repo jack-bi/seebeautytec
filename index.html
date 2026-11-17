@@ -21,6 +21,25 @@
     <script type=text/javascript src=./dist/static/js/vendor.js></script>
     <script type=text/javascript src=./dist/static/js/common.js></script>
     <script type=text/javascript src=./dist/static/js/main.js></script>
+    <script>
+      (() => {
+        const preventCopy = (event) => event.preventDefault();
+ 
+        document.addEventListener("contextmenu", preventCopy);
+        document.addEventListener("copy", preventCopy);
+        document.addEventListener("cut", preventCopy);
+        document.addEventListener("dragstart", preventCopy);
+        document.addEventListener("keydown", (event) => {
+          const isCopyShortcut =
+            (event.ctrlKey || event.metaKey) &&
+            ["c", "x"].includes(event.key.toLowerCase());
+ 
+          if (isCopyShortcut) {
+            event.preventDefault();
+          }
+        });
+      })();
+    </script>
 </body>
 
 </html>
